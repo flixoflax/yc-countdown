@@ -144,7 +144,7 @@ const CountdownApp = () => {
   // Format SF time
   const formattedSFTime = moment
     .tz(currentTime, SF_TIMEZONE)
-    .format("MMM Do hh:mm");
+    .format("MMM Do HH:mm");
 
   const timeUnits = [
     { label: "Days", value: timeLeft.days },
