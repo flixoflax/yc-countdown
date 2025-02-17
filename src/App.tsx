@@ -3,7 +3,7 @@ import { format } from "date-fns-tz";
 import confetti from "canvas-confetti";
 import logo from "./logo.png";
 
-const YC_RESPONSE_DATE = "2025-02-12T23:59:00-08:00"; // Pacific Time
+const YC_RESPONSE_DATE = "2025-03-12T23:59:00-08:00"; // Pacific Time
 const SF_TIMEZONE = "America/Los_Angeles";
 
 const fireConfetti = () => {
