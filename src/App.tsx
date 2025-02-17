@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { format } from "date-fns-tz";
+import moment from "moment-timezone";
 import confetti from "canvas-confetti";
 import logo from "./logo.png";
 
@@ -95,8 +95,7 @@ const CountdownApp = () => {
   useEffect(() => {
     // Get user's timezone with fallback
     try {
-      const timeZone = Intl.DateTimeFormat().resolvedOptions().timeZone;
-      new Intl.DateTimeFormat("en-US", { timeZone }).format(new Date());
+      const timeZone = moment.tz.guess();
       setUserTimeZone(timeZone);
     } catch (error) {
       console.warn("Failed to detect timezone, using UTC:", error);
@@ -106,8 +105,8 @@ const CountdownApp = () => {
     const calculateTimeLeft = () => {
       const now = new Date();
       setCurrentTime(now);
-      const targetDate = new Date(YC_RESPONSE_DATE);
-      const difference = +targetDate - +now;
+      const targetDate = moment.tz(YC_RESPONSE_DATE, SF_TIMEZONE);
+      const difference = targetDate.diff(moment());
 
       if (difference > 0) {
         setTimeLeft({
@@ -134,19 +133,18 @@ const CountdownApp = () => {
   // Format the date with error handling
   let formattedLocalDate = "";
   try {
-    const localResponseDate = new Date(YC_RESPONSE_DATE);
-    formattedLocalDate = format(localResponseDate, "MMM d, yyyy h:mm a z", {
-      timeZone: userTimeZone,
-    });
+    formattedLocalDate = moment
+      .tz(YC_RESPONSE_DATE, userTimeZone)
+      .format("MMM D, YYYY h:mm A z");
   } catch (error) {
     console.warn("Error formatting date:", error);
     formattedLocalDate = new Date(YC_RESPONSE_DATE).toLocaleString();
   }
 
   // Format SF time
-  const formattedSFTime = format(currentTime, "MMM do hh:mm", {
-    timeZone: SF_TIMEZONE,
-  });
+  const formattedSFTime = moment
+    .tz(currentTime, SF_TIMEZONE)
+    .format("MMM Do hh:mm");
 
   const timeUnits = [
     { label: "Days", value: timeLeft.days },
