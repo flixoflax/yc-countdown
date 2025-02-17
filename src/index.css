@@ -1,0 +1,42 @@
+@import "tailwindcss";
+
+@keyframes confetti-1 {
+  0% {
+    transform: translate(0, -10vh) rotate(0deg);
+  }
+  100% {
+    transform: translate(10vw, 100vh) rotate(720deg);
+  }
+}
+
+@keyframes confetti-2 {
+  0% {
+    transform: translate(0, -10vh) rotate(0deg);
+  }
+  100% {
+    transform: translate(-15vw, 100vh) rotate(-540deg);
+  }
+}
+
+@keyframes confetti-3 {
+  0% {
+    transform: translate(0, -10vh) rotate(0deg);
+  }
+  100% {
+    transform: translate(20vw, 100vh) rotate(360deg);
+  }
+}
+
+.animate-confetti-1 {
+  animation: confetti-1 2s linear infinite;
+}
+
+.animate-confetti-2 {
+  animation: confetti-2 2.5s linear infinite;
+  animation-delay: 0.2s;
+}
+
+.animate-confetti-3 {
+  animation: confetti-3 1.8s linear infinite;
+  animation-delay: 0.4s;
+}
